@@ -6,9 +6,12 @@ int main()
 {
 	std::cout << "Lemons" << "\n";
 	
-	ListDigraph g;
+	ListGraph g;
 	
-	ListDigraph::Node u = g.addNode();
+	ListGraph::Node u = g.addNode();
+	ListGraph::Node v = g.addNode();
+	
+	ListGraph::Edge e = g.addEdge(u, v);
 	
 	return 0;
 }
