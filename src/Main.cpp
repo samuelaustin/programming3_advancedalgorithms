@@ -29,12 +29,17 @@ int main()
 	
 	VCAlgorithm* alg = new VCAlgorithm(g);
 	
+	std::cout << "Printing random edge id..." << "\n";
 	std::srand(time(0));
 	for(int i = 0; i < 10; i++)
 	{
 		std::cout << g->id(alg->randomEdge()) << "\n";
 	}
+	std::cout << "\n";
+	
 	alg->run();
+	std::cout << "Size of cover: " << alg->getCoverSize() << "\n";
+	std::cout << "Run Time: " << alg->getRunTime() << "\n";
 	
 	return 0;
 }

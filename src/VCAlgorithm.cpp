@@ -28,7 +28,6 @@ int VCAlgorithm::run()
 		//Choose a random edge
 		ListGraph::Edge e = randomEdge();
 		
-		std::cout << "Random edge chosen." << "\n";
 		ListGraph::Node u = graph->u(e);
 		ListGraph::Node v = graph->v(e);
 		
@@ -36,16 +35,13 @@ int VCAlgorithm::run()
 		cover->push_back(u);
 		cover->push_back(v);
 		
-		std::cout << "Going to remove covered edges..." << "\n";
+		
 		//Remove all edges of the added nodes
 		removeEdge(e);
 		removeEdgesOfNode(u);
 		removeEdgesOfNode(v);
-		
-		std::cout << "Done." << "\n";
 	}
 	
-	std::cout << "All edges covered." << "\n";
 	clock_t end = clock();
 	std::cout << "Algorithm Completed" << "\n";
 	
@@ -85,11 +81,16 @@ void VCAlgorithm::removeEdge(ListGraph::Edge e)
 
 void VCAlgorithm::removeEdgesOfNode(ListGraph::Node n)
 {
-	for(std::vector<ListGraph::Edge>::iterator it = edges.begin(); it != edges.end(); it++)
+	std::vector<ListGraph::Edge>::iterator it = edges.begin();
+	while(it != edges.end())
 	{
 		if(graph->u(*it) == n || graph->v(*it) == n)
 		{
-			edges.erase(it);
+			it = edges.erase(it);
+		}
+		else
+		{
+			++it;
 		}
 	}
 }
