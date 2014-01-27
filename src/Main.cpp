@@ -5,7 +5,7 @@ using namespace lemon;
 
 int main()
 {
-	std::string file = "../files/frb30-15-mis/frb30-15-2.mis";
+	std::string file = "../files/frb59-26-mis/frb59-26-2.mis";
 	
 	std::srand(time(0));
 	
@@ -17,7 +17,7 @@ int main()
 	alg->run();
 	
 	std::cout << "Size of cover: " << alg->getCoverSize() << "\n";
-	std::cout << "Run Time: " << alg->getRunTime() << "\n";
+	std::cout << "Run Time (ms): " << alg->getRunTime() << "\n";
 	
 	return 0;
 }

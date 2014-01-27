@@ -37,7 +37,7 @@ int VCAlgorithm::run()
 	clock_t end = clock();
 	std::cout << "Algorithm Completed" << "\n";
 	
-	runTime = end - start;
+	runTime = ((double)(end - start))/(CLOCKS_PER_SEC/1000);
 	return runTime;
 }
 
@@ -64,6 +64,8 @@ void VCAlgorithm::removeEdge(ListGraph::Edge e)
 
 void VCAlgorithm::removeEdgesOfNode(ListGraph::Node n)
 {
+	graph->erase(n);
+	/*
 	for(ListGraph::EdgeIt it(*graph); it != INVALID; ++it)
 	{
 		if(graph->u(it) == n || graph->v(it) == n)
@@ -71,6 +73,7 @@ void VCAlgorithm::removeEdgesOfNode(ListGraph::Node n)
 			graph->erase(it);
 		}
 	}
+	*/
 }
 
 int VCAlgorithm::getRunTime()
