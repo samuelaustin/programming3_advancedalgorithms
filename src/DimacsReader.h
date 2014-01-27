@@ -12,6 +12,7 @@ class DimacsReader {
 	private:
 	int nodes;
 	int edges;
+	ListGraph g;
 	
 	public:
 	DimacsReader();
@@ -21,7 +22,7 @@ class DimacsReader {
 	int numberOfEdges();
 	
 	private:
-	ListGraph* processFirstLine(std::string);
+	void processFirstLine(std::string);
 	void readEdge(std::string);
 };
 

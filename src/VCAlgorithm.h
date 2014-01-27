@@ -6,7 +6,6 @@ class VCAlgorithm {
 	
 	private:
 	ListGraph* graph;
-	std::vector<ListGraph::Edge> edges;
 	
 	std::vector<ListGraph::Node>* cover;
 	clock_t runTime;

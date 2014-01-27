@@ -6,14 +6,6 @@ using namespace lemon;
 VCAlgorithm::VCAlgorithm(ListGraph* g)
 {
 	graph = g;
-	
-	ListGraph::EdgeIt it(*graph);
-	while(it!=INVALID)
-	{
-		edges.push_back(it);
-		++it;
-	}
-	
 	cover = new std::vector<ListGraph::Node>();
 }
 
@@ -23,7 +15,7 @@ int VCAlgorithm::run()
 	clock_t start = clock();
 	
 	//Perform algorithm while there are still edges in the graph
-	while(edges.size() > 0)
+	while(countEdges(*graph) > 0)
 	{
 		//Choose a random edge
 		ListGraph::Edge e = randomEdge();
@@ -52,7 +44,6 @@ int VCAlgorithm::run()
 ListGraph::Edge VCAlgorithm::randomEdge()
 {
 	int n = countEdges(*graph);
-	n = edges.size();
 	int k = std::rand() % n;
 	
 	ListGraph::EdgeIt it(*graph);
@@ -63,34 +54,21 @@ ListGraph::Edge VCAlgorithm::randomEdge()
 		count++;
 	}
 	
-	
-	return edges[k];
+	return it;
 }
 
 void VCAlgorithm::removeEdge(ListGraph::Edge e)
 {
-	for(std::vector<ListGraph::Edge>::iterator it = edges.begin(); it != edges.end(); it++)
-	{
-		if(*it == e)
-		{
-			edges.erase(it);
-			return;
-		}
-	}
+	graph->erase(e);
 }
 
 void VCAlgorithm::removeEdgesOfNode(ListGraph::Node n)
 {
-	std::vector<ListGraph::Edge>::iterator it = edges.begin();
-	while(it != edges.end())
+	for(ListGraph::EdgeIt it(*graph); it != INVALID; ++it)
 	{
-		if(graph->u(*it) == n || graph->v(*it) == n)
+		if(graph->u(it) == n || graph->v(it) == n)
 		{
-			it = edges.erase(it);
-		}
-		else
-		{
-			++it;
+			graph->erase(it);
 		}
 	}
 }
