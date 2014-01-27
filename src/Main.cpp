@@ -1,11 +1,11 @@
 #include "VCAlgorithm.h"
+#include "DimacsReader.h"
 
 using namespace lemon;
 
 int main()
 {
-	std::cout << "Lemons" << "\n";
-	
+	/*
 	ListGraph* g = new ListGraph();
 	
 	
@@ -26,9 +26,10 @@ int main()
 	ListGraph::Edge e7 = g->addEdge(d, u);
 	
 	std::cout << "Number of edges: " << countEdges(*g) << "\n";
+	*/
 	
-	VCAlgorithm* alg = new VCAlgorithm(g);
-	
+	//VCAlgorithm* alg = new VCAlgorithm(g);
+	/*
 	std::cout << "Printing random edge id..." << "\n";
 	std::srand(time(0));
 	for(int i = 0; i < 10; i++)
@@ -36,10 +37,18 @@ int main()
 		std::cout << g->id(alg->randomEdge()) << "\n";
 	}
 	std::cout << "\n";
+	*/
 	
+	/*
 	alg->run();
 	std::cout << "Size of cover: " << alg->getCoverSize() << "\n";
 	std::cout << "Run Time: " << alg->getRunTime() << "\n";
+	*/
+	
+	std::string file = "../files/frb30-15-mis/frb30-15-1.mis";
+	
+	DimacsReader* reader = new DimacsReader();
+	reader->readFile(file);
 	
 	return 0;
 }
