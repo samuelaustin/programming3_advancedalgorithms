@@ -13,3 +13,6 @@
 
 # Temp files
 *.swp
+
+# Compiled python
+*.pyc
