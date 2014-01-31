@@ -1,6 +1,6 @@
 all: main
 
-LIBS = -lemon
+LIBS = -L/home/Documents/advanced_algorithms/programming3_advanvedalgorithms/libs/libemon.a
 ARGS = -c -std=c++0x
 
 main: Main.o VCAlgorithm.o DimacsReader.o
