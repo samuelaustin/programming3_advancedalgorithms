@@ -1,7 +1,7 @@
 all: main
 
-INCL = -I../include/
-LIBS = -l../libs/libemon.a
+INCL = -I ../include/
+LIBS = -L ../libs/libemon.a
 ARGS = -c -std=c++0x
 
 main: Main.o VCAlgorithm.o DimacsReader.o
