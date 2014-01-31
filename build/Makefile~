@@ -2,7 +2,7 @@ all: main
 
 INCL = -I../include/
 LIBS = -l../libs/libemon.a
-ARGS = -c -std=c++0x
+ARGS = -c -std=c++11
 
 main: Main.o VCAlgorithm.o DimacsReader.o
 	$(CXX) -o programming3 *.o $(LIBS) $(INCL)
