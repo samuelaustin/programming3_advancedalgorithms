@@ -3,10 +3,17 @@
 
 using namespace lemon;
 
-int main()
+int main(int argc, char* args[])
 {
-	std::string file = "../files/frb59-26-mis/frb59-26-2.mis";
+	std::string file(args[1]);
 	
+	//std::string file = "test";
+	std::cout << file << "\n";
+	
+	
+	/*
+	std::string file = "../files/frb59-26-mis/frb59-26-2.mis";
+	*/
 	std::srand(time(0));
 	
 	DimacsReader* reader = new DimacsReader();
