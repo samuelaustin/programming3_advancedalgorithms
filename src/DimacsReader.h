@@ -17,6 +17,7 @@ class DimacsReader {
 	public:
 	DimacsReader();
 	ListGraph* readFile(std::string);
+	ListGraph* readString(std::string);
 	
 	int numberOfNodes();
 	int numberOfEdges();

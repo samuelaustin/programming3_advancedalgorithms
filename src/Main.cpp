@@ -7,24 +7,18 @@ int main(int argc, char* args[])
 {
 	std::string file(args[1]);
 	
-	//std::string file = "test";
-	std::cout << file << "\n";
-	
-	
 	/*
 	std::string file = "../files/frb59-26-mis/frb59-26-2.mis";
 	*/
 	std::srand(time(0));
 	
 	DimacsReader* reader = new DimacsReader();
-	ListGraph* g = reader->readFile(file);
-	std::cout << "File read and graph created." << "\n";
+	ListGraph* g = reader->readString(file);
 	
 	VCAlgorithm* alg = new VCAlgorithm(g);
 	alg->run();
 	
-	std::cout << "Size of cover: " << alg->getCoverSize() << "\n";
-	std::cout << "Run Time (ms): " << alg->getRunTime() << "\n";
+	std::cout << alg->getCoverSize() << "\n";
 	
 	return 0;
 }
