@@ -4,7 +4,7 @@ INCL = -I ../include/
 LIBS = -L ../libs/libemon.a
 ARGS = -c -std=c++0x
 
-main: Main.o VCAlgorithm.o DimacsReader.o
+main: Main.o VCAlgorithm.o VCGreedy.o DimacsReader.o
 	$(CXX) -o programming3 *.o $(LIBS) $(INCL)
 	
 Main.o: ../src/Main.cpp
@@ -13,6 +13,9 @@ Main.o: ../src/Main.cpp
 VCAlgorithm.o: ../src/VCAlgorithm.cpp
 	$(CXX) ../src/VCAlgorithm.cpp $(ARGS) $(INCL)
 	
+VCGreedy.o: ../src/VCGreedy.cpp
+	$(CXX) ../src/VCGreedy.cpp $(ARGS) $(INCL)
+
 DimacsReader.o: ../src/DimacsReader.cpp
 	$(CXX) ../src/DimacsReader.cpp $(ARGS) $(INCL)
 	

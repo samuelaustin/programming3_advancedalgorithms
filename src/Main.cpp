@@ -1,9 +1,10 @@
 #include "VCAlgorithm.h"
+#include "VCGreedy.h"
 #include "DimacsReader.h"
 
 using namespace lemon;
 
-int main(int argc, char* args[])
+int main(int argc, char** args)
 {
 	std::string file(args[1]);
 	
@@ -14,11 +15,22 @@ int main(int argc, char* args[])
 	
 	DimacsReader* reader = new DimacsReader();
 	ListGraph* g = reader->readString(file);
-	
-	VCAlgorithm* alg = new VCAlgorithm(g);
-	alg->run();
-	
-	std::cout << alg->getCoverSize() << "\n";
+	if(args[2][0]=='r')
+	{
+		VCAlgorithm* alg = new VCAlgorithm(g);
+		alg->run();
+		std::cout << alg->getCoverSize() << "\n";
+	}
+	else if(args[2][0]=='g')
+	{
+		VCGreedy* alg = new VCGreedy(g);
+		alg->run();
+		std::cout << alg->getCoverSize() << "\n";
+	}
+	else
+	{
+		return 1;
+	}
 	
 	return 0;
 }
