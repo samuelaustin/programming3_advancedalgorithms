@@ -14,7 +14,6 @@ ListGraph* DimacsReader::readFile(std::string file)
 	nodes = 0;
 	edges = 0;
 	
-	std::cout << "Going to read DIMACS file..." << "\n";
 	std::ifstream reader;
 	reader.open(file);
 	
@@ -51,6 +50,40 @@ ListGraph* DimacsReader::readFile(std::string file)
 	return &g;
 }
 
+ListGraph* DimacsReader::readString(std::string s)
+{
+	g.clear();
+	nodes = 0;
+	edges = 0;
+	
+	std::istringstream reader(s);
+	std::string line = "";
+	while(reader.peek() == 'c')
+	{
+		std::getline(reader, line);
+	}
+	
+	// Get first line which indicates number of nodes/edges
+	std::getline(reader, line);
+	if(!line.empty())
+	{
+		processFirstLine(line);
+	}
+	
+	if(nodes > 0 && edges > 0)
+	{
+		for(int i = 0; i < edges; i++)
+		{
+			std::getline(reader, line);
+			if(!line.empty())
+			{
+				readEdge(line);
+			}
+		}
+	}
+	return &g;
+}
+
 void DimacsReader::processFirstLine(std::string line)
 {
 	std::size_t found = line.find("p edge ");
@@ -61,9 +94,6 @@ void DimacsReader::processFirstLine(std::string line)
 		std::string::size_type size;
 		nodes = std::stoi(line, &size);
 		edges = std::stoi(line.substr(size));
-		
-		std::cout << "Nodes: " << nodes << "\n";
-		std::cout << "Edges: " << edges << "\n";
 		
 		g.reserveNode(nodes);
 		g.reserveEdge(edges);

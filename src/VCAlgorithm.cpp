@@ -11,7 +11,6 @@ VCAlgorithm::VCAlgorithm(ListGraph* g)
 
 int VCAlgorithm::run()
 {
-	std::cout << "Starting Algorithm..." << "\n";
 	clock_t start = clock();
 	
 	//Perform algorithm while there are still edges in the graph
@@ -35,7 +34,6 @@ int VCAlgorithm::run()
 	}
 	
 	clock_t end = clock();
-	std::cout << "Algorithm Completed" << "\n";
 	
 	runTime = ((double)(end - start))/(CLOCKS_PER_SEC/1000);
 	return runTime;
