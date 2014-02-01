@@ -6,6 +6,7 @@ using namespace lemon;
 class VCGreedyImproved {
 	
 	private:
+	bool reverse;
 	ListGraph* graph;
 	ListGraph::NodeMap<int> *nmap;
 	ListGraph::EdgeMap<int> *emap;
@@ -21,8 +22,7 @@ class VCGreedyImproved {
 	
 	
 	public:
-	VCGreedyImproved(ListGraph* g);
-	
+	VCGreedyImproved(ListGraph* g, bool r = false);
 	int run();
 	ListGraph::Edge GreedyEdge();
 	

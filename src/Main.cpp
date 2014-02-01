@@ -33,7 +33,13 @@ int main(int argc, char** args)
 	}
 	else if(args[2][0]=='i')
 	{
-		VCGreedyImproved* alg = new VCGreedyImproved(g);
+		VCGreedyImproved* alg = new VCGreedyImproved(g,0);
+		alg->run();
+		std::cout << alg->getCoverSize() << "\n";
+	}
+	else if(args[2][0]=='!')
+	{
+		VCGreedyImproved* alg = new VCGreedyImproved(g,1);
 		alg->run();
 		std::cout << alg->getCoverSize() << "\n";
 	}

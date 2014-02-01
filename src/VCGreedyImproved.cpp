@@ -2,8 +2,9 @@
 #include "VCGreedyImproved.h"
 
 
-VCGreedyImproved::VCGreedyImproved(ListGraph* g)
+VCGreedyImproved::VCGreedyImproved(ListGraph* g, bool r)
 {
+	reverse = r;
 	graph = g;
 	elist = new std::vector<ListGraph::Edge>();
 	nlist = new std::vector<ListGraph::Node>();
@@ -96,7 +97,10 @@ int VCGreedyImproved::getCoverSize()
 
 void VCGreedyImproved::prune_set()
 {
-	std::sort(nlist->begin(),nlist->end(), [&](ListGraph::Node n1,ListGraph::Node n2)->bool{return countIncEdges(*graph,n1)<countIncEdges(*graph,n2);});
+	if(!reverse)
+		std::sort(nlist->begin(),nlist->end(), [&](ListGraph::Node n1,ListGraph::Node n2)->bool{return countIncEdges(*graph,n1)<countIncEdges(*graph,n2);});
+	else
+		std::sort(nlist->begin(),nlist->end(), [&](ListGraph::Node n1,ListGraph::Node n2)->bool{return countIncEdges(*graph,n1)>countIncEdges(*graph,n2);});
 	for(std::vector<ListGraph::Node>::iterator it = nlist->begin(); it != nlist->end(); ++it)
 		if((*nmap)[*it])
 		{
