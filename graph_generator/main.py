@@ -12,14 +12,15 @@ from subprocess import Popen, PIPE
 
 def generate_data():
 	apxg_vc		= range(0,10)
+	apxi_vc		= range(0,10)
 	apxr_vc_mean 	= range(0,10)
 	apxr_vc_errorl 	= range(0,10)
 	apxr_vc_errorh 	= range(0,10)
 	ind = range(0,10)
 	for i in range(0,10):
-		#G=nx.erdos_renyi_graph(50,0.01*i)
+		G=nx.erdos_renyi_graph(200,0.01*(i+1))
 		#G = nx.random_regular_graph(i*5, 100)
-		G = nx.powerlaw_cluster_graph(50, i+2, 0.0)		
+		#G = nx.powerlaw_cluster_graph(50, i+2, 0.0)		
 		temp_data = range(0,200)
 		for j in range(0,200):
 			process = Popen(["../build/programming3", utils.dmax(G),"r"], stdout=PIPE)	
@@ -28,15 +29,26 @@ def generate_data():
 			data = re.findall(r"[-+]?\d*\.\d+|\d+",output)	
 			data = [float(s) for s in data]
 			temp_data[j]=data[0]	
+		#Random
 		apxr_vc_mean[i]  = np.mean(temp_data)
 		apxr_vc_errorl[i] = np.min(temp_data)-np.mean(temp_data) 
 		apxr_vc_errorh[i] = np.mean(temp_data)-np.max(temp_data)
+		
+		#Greedy		
 		process = Popen(["../build/programming3", utils.dmax(G),"g"], stdout=PIPE)	
 		(output, err) = process.communicate()
 		exit_code = process.wait()
 		apxg_vc[i] = int(output)
+
+		#Greedy Improved
+		process = Popen(["../build/programming3", utils.dmax(G),"i"], stdout=PIPE)	
+		(output, err) = process.communicate()
+		exit_code = process.wait()
+		apxi_vc[i] = int(output)
+
 	plt.errorbar(ind,apxr_vc_mean,[apxr_vc_errorl,apxr_vc_errorh],fmt='-bo')
 	plt.plot(ind,apxg_vc,'-ro')
+	plt.plot(ind,apxi_vc,'-go')
 	plt.show()
 	#return (ind,apxr_vc_mean,[apxr_vc_errorl,apxr_vc_errorh],apxg_vc)
 

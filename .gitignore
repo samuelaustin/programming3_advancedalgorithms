@@ -16,3 +16,8 @@
 
 # Compiled python
 *.pyc
+
+# tjak
+*.png
+*.*~
+*~

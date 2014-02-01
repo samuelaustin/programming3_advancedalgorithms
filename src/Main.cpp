@@ -1,5 +1,6 @@
 #include "VCAlgorithm.h"
 #include "VCGreedy.h"
+#include "VCGreedyImproved.h"
 #include "DimacsReader.h"
 #include <sys/time.h>
 
@@ -27,6 +28,12 @@ int main(int argc, char** args)
 	else if(args[2][0]=='g')
 	{
 		VCGreedy* alg = new VCGreedy(g);
+		alg->run();
+		std::cout << alg->getCoverSize() << "\n";
+	}
+	else if(args[2][0]=='i')
+	{
+		VCGreedyImproved* alg = new VCGreedyImproved(g);
 		alg->run();
 		std::cout << alg->getCoverSize() << "\n";
 	}

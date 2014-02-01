@@ -4,3 +4,7 @@ def dmax(G):
 	for line in nx.generate_edgelist(G, data=False):
 		out += "e " + line + "\n"
 	return out
+
+def write_dimacs(G):
+	s=dmax(G)
+	f.write(s, "graph.dim")
