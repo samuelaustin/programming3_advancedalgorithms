@@ -65,6 +65,7 @@ def generate_data():
 	plt.ylabel('Size Vertex Cover')
 	plt.xlabel('Graph Connectivity')
 	plt.legend(loc='lower right')
+	fig.savefig('generate_data.png', dpi=750)
 	plt.show()
 	#return (ind,apxr_vc_mean,[apxr_vc_errorl,apxr_vc_errorh],apxg_vc)
 
@@ -87,6 +88,7 @@ def averageNodeData():
 	plt.plot(averageRemovedEdges, sizeOfCover, 'ro')
 	plt.ylabel('Size Vertex Cover')
 	plt.xlabel('Average #Node Deletions')
+	fig.savefig('average_node_deletions.png', dpi=750)
 	plt.show()
 
 def histogram():
@@ -105,6 +107,7 @@ def histogram():
 	plt.legend()
 	plt.xlabel('Size Vertex Cover')
 	plt.ylabel('Probability')
+	fig.savefig('histogram.png', dpi=750)
 	pl.show()
 	
 	
