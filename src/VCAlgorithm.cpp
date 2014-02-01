@@ -28,9 +28,12 @@ int VCAlgorithm::run()
 		
 		
 		//Remove all edges of the added nodes
-		removeEdge(e);
-		removeEdgesOfNode(u);
-		removeEdgesOfNode(v);
+		//removeEdge(e);
+		int removedU = removeEdgesOfNode(u);
+		int removedV = removeEdgesOfNode(v);
+
+		int removed = removedU + removedV;
+		removedEdges.push_back(removed);
 	}
 	
 	clock_t end = clock();
@@ -55,23 +58,27 @@ ListGraph::Edge VCAlgorithm::randomEdge()
 	return it;
 }
 
+double VCAlgorithm::getAverageRemovedEdges()
+{
+	double total = 0;
+	for(int i = 0; i < removedEdges.size(); i++)
+	{
+		total += removedEdges[i];
+	}
+	return total/removedEdges.size();
+}
+
 void VCAlgorithm::removeEdge(ListGraph::Edge e)
 {
+	
 	graph->erase(e);
 }
 
-void VCAlgorithm::removeEdgesOfNode(ListGraph::Node n)
+int VCAlgorithm::removeEdgesOfNode(ListGraph::Node n)
 {
+	int removed = countIncEdges(*graph, n);
 	graph->erase(n);
-	/*
-	for(ListGraph::EdgeIt it(*graph); it != INVALID; ++it)
-	{
-		if(graph->u(it) == n || graph->v(it) == n)
-		{
-			graph->erase(it);
-		}
-	}
-	*/
+	return removed;
 }
 
 int VCAlgorithm::getRunTime()

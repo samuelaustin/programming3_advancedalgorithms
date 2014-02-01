@@ -8,9 +8,10 @@ class VCAlgorithm {
 	ListGraph* graph;
 	
 	std::vector<ListGraph::Node>* cover;
+	std::vector<int> removedEdges;
 	clock_t runTime;
 	
-	void removeEdgesOfNode(ListGraph::Node);
+	int removeEdgesOfNode(ListGraph::Node);
 	void removeEdge(ListGraph::Edge);
 	
 	
@@ -19,6 +20,7 @@ class VCAlgorithm {
 	
 	int run();
 	ListGraph::Edge randomEdge();
+	double getAverageRemovedEdges();
 	
 	int getRunTime();
 	std::vector<ListGraph::Node>* getCover();

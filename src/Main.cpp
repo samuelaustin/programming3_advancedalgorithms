@@ -1,6 +1,7 @@
 #include "VCAlgorithm.h"
 #include "VCGreedy.h"
 #include "DimacsReader.h"
+#include <sys/time.h>
 
 using namespace lemon;
 
@@ -11,7 +12,9 @@ int main(int argc, char** args)
 	/*
 	std::string file = "../files/frb59-26-mis/frb59-26-2.mis";
 	*/
-	std::srand(time(0));
+   	struct timeval time ;
+	gettimeofday(&time, NULL);
+	std::srand(time.tv_usec);
 	
 	DimacsReader* reader = new DimacsReader();
 	ListGraph* g = reader->readString(file);
@@ -19,7 +22,7 @@ int main(int argc, char** args)
 	{
 		VCAlgorithm* alg = new VCAlgorithm(g);
 		alg->run();
-		std::cout << alg->getCoverSize() << "\n";
+		std::cout << alg->getCoverSize() << "," << alg->getAverageRemovedEdges() << "\n";
 	}
 	else if(args[2][0]=='g')
 	{
