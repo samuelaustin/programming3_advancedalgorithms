@@ -57,23 +57,27 @@ def generate_data():
 		apxir_vc[i] = int(output)
 
 	#plt.errorbar(ind,apxr_vc_mean,[apxr_vc_errorl,apxr_vc_errorh],fmt='-bo')
+	plt.ylabel('Size Vertex Cover')
+	plt.xlabel('Graph Connectivity')
+	#Random and Greedy
 	b1 = plt.plot(ind,apxr_vc_mean,'-kx',label='Random Heuristic')
 	plt.boxplot(apxr_vc, sym='k+', positions=ind,notch=1)
 	b3 = plt.plot(ind,apxg_vc,'-.ro',label='Greedy Heuristic')
-	b4 = plt.plot(ind,apxi_vc,'-g^',label='Greedy Heuristic & Max Greedy Cover Pruning')
-	b5 = plt.plot(ind,apxir_vc,'--bs',label='Greedy Heuristic & Min Greedy Cover Pruning')
-	plt.ylabel('Size Vertex Cover')
-	plt.xlabel('Graph Connectivity')
 	plt.legend(loc='lower right')
-	fig.savefig('generate_data.png', dpi=750)
-	plt.show()
+	plt.savefig('RandomGreedy.png', dpi=100)
+	#With pruning
+	b4 = plt.plot(ind,apxi_vc,'-g^',label='Greedy Heuristic & Min Greedy Cover Pruning')
+	b5 = plt.plot(ind,apxir_vc,'--bs',label='Greedy Heuristic & Max Greedy Cover Pruning')
+	plt.legend(loc='lower right')
+	plt.savefig('Pruning.png', dpi=100)
+	#plt.show()
 	#return (ind,apxr_vc_mean,[apxr_vc_errorl,apxr_vc_errorh],apxg_vc)
 
 def averageNodeData():
 	sizeOfCover = range(0,200)
 	averageRemovedEdges = range(0,200)
 
-	G = nx.erdos_renyi_graph(500,0.1)		
+	G = nx.erdos_renyi_graph(100,0.05)		
 	temp_data = range(0,200)
 	for j in range(0,200):
 		process = Popen(["../build/programming3", utils.dmax(G),"r"], stdout=PIPE)	
@@ -87,12 +91,12 @@ def averageNodeData():
 		averageRemovedEdges[j] = data[1]
 	plt.plot(averageRemovedEdges, sizeOfCover, 'ro')
 	plt.ylabel('Size Vertex Cover')
-	plt.xlabel('Average #Node Deletions')
-	fig.savefig('average_node_deletions.png', dpi=750)
-	plt.show()
+	plt.xlabel('Average #Edge Deletions per Iteration')
+	plt.savefig('average_node_deletions.png', dpi=100)
+	#plt.show()
 
 def histogram():
-	G=nx.erdos_renyi_graph(200,0.05)
+	G=nx.erdos_renyi_graph(100,0.05)
 	temp_data = range(0,1000)
 	for j in range(0,1000):
 			process = Popen(["../build/programming3", utils.dmax(G),"r"], stdout=PIPE)	
@@ -107,8 +111,8 @@ def histogram():
 	plt.legend()
 	plt.xlabel('Size Vertex Cover')
 	plt.ylabel('Probability')
-	fig.savefig('histogram.png', dpi=750)
-	pl.show()
+	plt.savefig('histogram.png', dpi=100)
+	#pl.show()
 	
 	
 histogram();
