@@ -1,7 +1,7 @@
 #include <ctime>
 #include "VCGreedyImproved.h"
 
-
+using namespace std;
 VCGreedyImproved::VCGreedyImproved(ListGraph* g, bool r)
 {
 	reverse = r;
@@ -33,6 +33,7 @@ int VCGreedyImproved::run()
 		removeEdgesOfNode(u);
 		removeEdgesOfNode(v);
 	}
+	
 	prune_set();
 	clock_t end = clock();
 	
@@ -42,14 +43,29 @@ int VCGreedyImproved::run()
 
 ListGraph::Edge VCGreedyImproved::GreedyEdge()
 {
+	/*
 	std::sort(elist->begin(),elist->end(), [&](ListGraph::Edge e1,ListGraph::Edge e2)->bool
 		{
 			int ec1 = countIncEdges(*graph, graph->u(e1)) + countIncEdges(*graph,graph->v(e1));
 			int ec2 = countIncEdges(*graph, graph->u(e2)) + countIncEdges(*graph,graph->v(e2));
 			return (1-(*emap)[e1])*ec1>(1-(*emap)[e2])*ec2;
 		});
+	*/	
 	//ListGraph::EdgeIt foo(*graph);
-	return *(elist->begin());
+	int max = -1;
+	ListGraph::EdgeIt it2(*graph);
+	ListGraph::Edge best = it2;
+	for(ListGraph::EdgeIt it(*graph); it != INVALID; ++it)
+	{
+		int s = countIncEdges(*graph, graph->u(it)) + countIncEdges(*graph,graph->v(it));
+		if((*emap)[it] == 0 && s > max)
+		{
+			max = s;
+			best = it;
+		}
+	}
+
+	return best;
 }
 
 //bool VCGreedyImproved::sortDegree(ListGraph::Edge e1, ListGraph::Edge e2)
@@ -97,6 +113,7 @@ int VCGreedyImproved::getCoverSize()
 
 void VCGreedyImproved::prune_set()
 {
+	
 	if(!reverse)
 		std::sort(nlist->begin(),nlist->end(), [&](ListGraph::Node n1,ListGraph::Node n2)->bool{return countIncEdges(*graph,n1)<countIncEdges(*graph,n2);});
 	else
